@@ -304,6 +304,7 @@ footer span:last-child { display: flex; align-items: center; gap: 7px; color: #6
 }
 
 [hidden] { display: none !important; }
+
 /* ---------- Auth links + token box (register / forgot / reset) ---------- */
 .inline-link {
     color: var(--teal);
