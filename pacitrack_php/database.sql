@@ -35,13 +35,25 @@ CREATE TABLE IF NOT EXISTS audit_logs (
   CONSTRAINT fk_audit_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS password_resets (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  used_at DATETIME NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_user (user_id),
+  INDEX idx_expires (expires_at),
+  CONSTRAINT fk_reset_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 -- Demo password for both accounts: PaciTrack2025!
 INSERT IGNORE INTO users (full_name,email,password_hash,role) VALUES
 ('Alex Mendoza','admin@pacificsurgical.ph','$2y$12$x4maQ4YFxHLLu7q1rOD2IOljs93Mgi3C208VSRB5Jej1IaA8jRR.','Administrator'),
 ('Operations User','operations@pacificsurgical.ph','$2y$12$x4maQ4YFxHLLu7q1rOD2IOljs93Mgi3C208VSRB5Jej1IaA8jRR.','Operations User');
 
 INSERT IGNORE INTO equipment (equipment_id,name,client,location,status,due_date,warranty_expiry,equipment_type) VALUES
-('EQ-2048','Arthroscopic Camera System','St. Luke’s Medical Center','Quezon City','In service','2026-11-18','2026-11-15','Capital / OR'),
+('EQ-2048','Arthroscopic Camera System','St. Luke''s Medical Center','Quezon City','In service','2026-11-18','2026-11-15','Capital / OR'),
 ('EQ-1964','Spinal Instrument Set','Makati Medical Center','Makati City','Maintenance due','2026-10-28','2027-04-28','Spine'),
 ('EQ-1892','Surgical Power Tool','Chong Hua Hospital','Cebu City','In service','2026-12-12','2027-06-12','Joints'),
 ('EQ-1765','Endoscopic Imaging Tower','Davao Doctors Hospital','Davao City','Under repair','2026-11-02','2026-11-10','Capital / OR'),
