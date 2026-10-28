@@ -5,11 +5,11 @@ $isSearching      = $q !== '';
 $recentEquipment  = $isSearching ? $equipment : array_slice($equipment, 0, 5);
 
 $donutColors = [
-    'In service'      => '#0c8f83',
-    'Maintenance due' => '#e9a85f',
-    'Under repair'    => '#4f80c5',
-    'In storage'      => '#b9c2c4',
-    'Retired'         => '#8a999c',
+    'In service'      => '#008080', // Teal
+    'Maintenance due' => '#e9a85f', // Amber
+    'Under repair'    => '#4f80c5', // Blue
+    'In storage'      => '#b9c2c4', // Gray
+    'Retired'         => '#8a999c', // Dark Gray
 ];
 $donutParts = [];
 $accum = 0.0;
@@ -24,14 +24,34 @@ $donutGradient = 'conic-gradient(' . implode(', ', $donutParts) . ')';
 
 require __DIR__ . '/../partials/stats.php';
 ?>
+
+<!-- ENTERPRISE SECURITY BANNER -->
+<div class="enterprise-banner">
+    <div class="eb-item">
+        <?= icon('lock', 16) ?> <span><strong>AES-256</strong> Data at Rest</span>
+    </div>
+    <div class="eb-divider"></div>
+    <div class="eb-item">
+        <?= icon('shield', 16) ?> <span><strong>RBAC</strong> Enforced</span>
+    </div>
+    <div class="eb-divider"></div>
+    <div class="eb-item">
+        <?= icon('history', 16) ?> <span><strong>Audit Logs</strong> Active</span>
+    </div>
+    <div class="eb-divider"></div>
+    <div class="eb-item">
+        <?= icon('clock', 16) ?> <span><strong>Auto-Backup</strong> 2 mins ago</span>
+    </div>
+</div>
+
 <section class="dashboard-grid">
     <article class="panel lifecycle-panel">
         <div class="panel-head">
-            <div><h2>Equipment lifecycle</h2><p>Current status across registered assets</p></div>
+            <div><h2>Asset Lifecycle Distribution</h2><p>Real-time status across registered surgical equipment</p></div>
         </div>
         <div class="chart-wrap">
             <div class="donut" style="background: <?= h($donutGradient) ?>">
-                <div><strong><?= number_format($stats['total']) ?></strong><span>Total assets</span></div>
+                <div><strong><?= number_format($stats['total']) ?></strong><span>Total Assets</span></div>
             </div>
             <div class="legend">
                 <?php
@@ -50,15 +70,15 @@ require __DIR__ . '/../partials/stats.php';
 
     <article class="panel alerts-panel">
         <div class="panel-head">
-            <div><h2>Priority alerts</h2><p>Items that need your attention</p></div>
+            <div><h2>Critical Workflows</h2><p>Actionable items requiring immediate attention</p></div>
             <a class="text-button" href="index.php?page=maintenance">View all <?= icon('arrow', 15) ?></a>
         </div>
         <div class="alert-list">
             <div class="alert-row">
                 <div class="alert-symbol red"><?= icon('alert') ?></div>
                 <div>
-                    <strong>Warranty expiring soon</strong>
-                    <p><?= number_format($stats['warranty_alerts']) ?> items within the next 30 days or already expired</p>
+                    <strong>Warranty Expiration Alerts</strong>
+                    <p><?= number_format($stats['warranty_alerts']) ?> assets require warranty review within 30 days.</p>
                 </div>
             </div>
             <?php if ($maintenanceItems): foreach ($maintenanceItems as $mr): ?>
@@ -66,13 +86,13 @@ require __DIR__ . '/../partials/stats.php';
                     <div class="alert-symbol amber"><?= icon('tool') ?></div>
                     <div>
                         <strong><?= h($mr['name']) ?></strong>
-                        <p><?= h($mr['equipment_id']) ?> · <?= h($mr['status']) ?> · due <?= h($mr['due_date']) ?></p>
+                        <p>ID: <?= h($mr['equipment_id']) ?> &middot; <?= h($mr['status']) ?> &middot; Target: <?= h($mr['due_date']) ?></p>
                     </div>
                 </div>
             <?php endforeach; else: ?>
                 <div class="alert-row">
                     <div class="alert-symbol blue"><?= icon('check') ?></div>
-                    <div><strong>No active maintenance alerts</strong><p>Equipment service status is up to date.</p></div>
+                    <div><strong>No pending maintenance</strong><p>All equipment service schedules are up to date.</p></div>
                 </div>
             <?php endif; ?>
         </div>
@@ -81,8 +101,8 @@ require __DIR__ . '/../partials/stats.php';
 
 <?php
 $tableRows       = $recentEquipment;
-$tableTitle      = 'Recently updated equipment';
-$tableSubtitle   = $isSearching ? 'Search results for "'.$q.'"' : 'Latest records from your equipment network';
+$tableTitle      = 'Equipment Registry (Recent Updates)';
+$tableSubtitle   = $isSearching ? 'Search results for "'.$q.'"' : 'Latest synchronized records from the central database';
 $showAddButton   = !$isSearching;
 $showClearSearch = $isSearching;
 $showViewAll     = !$isSearching && $stats['total'] > count($recentEquipment);

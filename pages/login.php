@@ -10,17 +10,20 @@
 <div class="login-page">
     <section class="login-story">
         <div class="login-brand">
-            <div class="brand-mark"><?= icon('shield', 25) ?></div>
+            <!-- Pinalitan ang shield icon ng Logo -->
+            <div style="background: white; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <img src="assets/img/logo.jpg" alt="Pacific Surgical Logo" style="height: 35px; width: auto; object-fit: contain;">
+            </div>
             <div><strong><?= h($config['app']['name']) ?></strong><span><?= h($config['app']['tagline']) ?></span></div>
         </div>
         <div class="story-content">
-            <p class="story-eyebrow"><span></span> Secure lifecycle management</p>
-            <h1>Protecting every asset.<br>Supporting every procedure.</h1>
-            <p>One secure source of truth for surgical equipment, warranties, maintenance, and regulatory records.</p>
+            <p class="story-eyebrow"><span></span> Internal Asset Management</p>
+            <h1>Streamlining surgical equipment.<br>Empowering healthcare.</h1>
+            <p>One secure source of truth for surgical equipment, warranties, maintenance, and regulatory records across Pacific Surgical Inc.</p>
             <div class="trust-grid">
-                <div><?= icon('lock') ?><span><strong>Hashed</strong>Password storage</span></div>
-                <div><?= icon('shield') ?><span><strong>RBAC</strong>Controlled access</span></div>
-                <div><?= icon('history') ?><span><strong>Auditable</strong>Complete traceability</span></div>
+                <div><?= icon('lock') ?><span><strong>Company</strong>Authorized Access</span></div>
+                <div><?= icon('shield') ?><span><strong>Secure</strong>Data Protection</span></div>
+                <div><?= icon('history') ?><span><strong>Compliant</strong>Audit Ready</span></div>
             </div>
         </div>
         <div class="story-footer"><span>Pacific Surgical Inc.</span><span>Data Privacy Act aligned</span></div>
@@ -30,12 +33,15 @@
 
     <main class="login-panel"><div class="login-card">
         <div class="mobile-login-brand">
-            <div class="brand-mark"><?= icon('shield', 22) ?></div>
+            <!-- Logo din sa mobile view -->
+            <div style="background: white; padding: 2px 6px; border-radius: 6px; display: inline-flex; align-items: center;">
+                <img src="assets/img/logo.jpg" alt="Logo" style="height: 24px;">
+            </div>
             <strong><?= h($config['app']['name']) ?></strong>
         </div>
         <div class="login-heading">
-            <p>Authorized access only</p>
-            <h2>Welcome back</h2>
+            <p>Pacific Surgical Inc.</p>
+            <h2>PaciTrack Portal</h2>
             <span>Sign in to continue to your secure workspace.</span>
         </div>
         <?php if (!empty($loginError)): ?>
@@ -92,8 +98,8 @@
         <p class="demo-note">Demo password: <?= h($config['app']['demo_password_hint']) ?> — change demo credentials before deployment.</p>
     </div>
     <footer class="login-footer">
-        <span>© <?= date('Y') ?> <?= h($config['app']['name']) ?></span>
-        <span>Privacy</span><span>Security</span><span>Support</span>
+        <span>© <?= date('Y') ?> <?= h($config['app']['tagline']) ?></span>
+        <span>Internal Use Only</span><span>Privacy</span><span>Support</span>
     </footer>
     </main>
 </div>

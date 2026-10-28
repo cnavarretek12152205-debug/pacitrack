@@ -1,8 +1,17 @@
 <aside class="sidebar" id="sidebar">
-    <div class="brand">
-        <div class="brand-mark"><?= icon('shield', 23) ?></div>
-        <div><strong><?= h($config['app']['name']) ?></strong><span><?= h($config['app']['tagline']) ?></span></div>
+    <div class="brand" style="align-items: flex-start;">
+        <!-- Logo Container -->
+        <div style="background: white; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <img src="assets/img/logo.jpg" alt="Pacific Surgical Logo" style="height: 32px; width: auto; object-fit: contain;">
+        </div>
+        
+        <!-- Text Container -->
+        <div style="margin-top: 2px;">
+            <strong style="font-size: 17px;"><?= h($config['app']['name']) ?></strong>
+            <span style="color: #9ab1b5; font-size: 9px; margin-top: 2px; display: block; line-height: 1.2;"><?= h($config['app']['tagline']) ?></span>
+        </div>
     </div>
+    
     <button class="mobile-close" onclick="toggleMenu(false)" aria-label="Close navigation"><?= icon('close') ?></button>
 
     <nav>
@@ -20,10 +29,10 @@
     </nav>
 
     <div class="security-card">
-        <div class="security-icon"><?= icon('lock') ?></div>
-        <strong>Protected access</strong>
-        <p>Role-based permissions and audit monitoring are enabled.</p>
-        <span><i></i> Session authenticated</span>
+        <div class="security-icon"><?= icon('shield') ?></div>
+        <strong>Pacific Surgical Inc.</strong>
+        <p>Internal asset management and audit monitoring are strictly enforced.</p>
+        <span><i></i> Secure Connection</span>
     </div>
     <div class="user-card">
         <div class="avatar"><?= h($initials) ?></div>

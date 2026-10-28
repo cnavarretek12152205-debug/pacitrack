@@ -71,7 +71,7 @@ $initials    = user_initials($currentUser['name']);
 $pageLabel   = $navItems[$page][1];
 $pageHeading = $page === 'overview' ? 'Good day, ' . $currentUser['name'] : $pageLabel;
 $pageSubhead = $page === 'overview'
-    ? 'Here is what is happening across your equipment network today.'
+    ? 'Here is the current status of your equipment network.'
     : 'Manage and monitor ' . strtolower($pageLabel) . ' across Pacific Surgical locations.';
 $today       = date('l, F j, Y');
 $flash       = get_flash();
@@ -99,10 +99,10 @@ require __DIR__ . '/partials/topbar.php';
     <p>
         <strong><?= h($currentUser['role']) ?> access</strong>
         <span><?= is_admin()
-            ? 'System oversight, equipment registration, user visibility, and audit records are enabled.'
-            : 'Equipment and service workflows enabled. Administrative records are restricted.' ?></span>
+            ? 'Administrator access enabled. Full system control, audit visibility, and user management are authorized.'
+            : 'Operations access enabled. Equipment and service workflows are authorized. Administrative records are restricted.' ?></span>
     </p>
-    <span class="session-status"><i></i> Secure session</span>
+    <span class="session-status"><i></i> Secure connection</span>
 </div>
 
 <section class="welcome">
@@ -118,8 +118,8 @@ require __DIR__ . '/partials/topbar.php';
 
 <footer>
     <span>PaciTrack v1.3</span>
-    <span>Equipment lifecycle management</span>
-    <span><i></i> Database connected</span>
+    <span>Internal Asset Management</span>
+    <span><i></i> © <?= date('Y') ?> Pacific Surgical Inc.</span>
 </footer>
 </div><!-- /content -->
 
